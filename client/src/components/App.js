@@ -10,8 +10,12 @@ import Signup from './Signup';
 import AdminStuff from './AdminStuff';
 import Profil from './Profil';
 import Veranstaltung from './Veranstaltung';
+import checkInvite from './checkInvite';
+import VeranstaltungListe from './VeranstaltungListe';
+import VeranstaltungDetail from './VeranstaltungDetail';
+import Favicon from 'react-favicon';
 import api from '../api';
-import logo from '../logo.svg';
+import logo from '../test.png';
 import './App.css';
 
 class App extends Component {
@@ -22,6 +26,9 @@ class App extends Component {
     }
     api.loadUser();
   }
+  componentWillMount() {
+    document.title = 'UstA e.V.'
+  }
 
   handleLogoutClick(e) {
     api.logout()
@@ -30,6 +37,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+      <Favicon url={logo} />
         <header className="App-header">
           <Navbar />
         </header>
@@ -37,14 +45,15 @@ class App extends Component {
         <div className="mittig">
           <Switch>
             <Route path="/" exact component={Home} />
-            <Route path="/countries" component={Countries} />
-            <Route path="/add-country" component={AddCountry} />
-            <Route path="/signup" component={Signup} />
             <Route path="/login" component={Login} />
             <Route path="/secret" component={Secret} />
             <Route path="/adminstuff" component={AdminStuff} />
-            <Route path="/veranstaltung" component={Veranstaltung} />
+            <Route path="/veranstaltung/erstellen" component={Veranstaltung} />
             <Route path="/profil" component={Profil} />
+            <Route path="/check/:id" component={checkInvite} />
+            <Route path="/signup" component={Signup} />
+            <Route path="/veranstaltung/liste" component={VeranstaltungListe} />
+            <Route path="/veranstaltung/:id" component={VeranstaltungDetail} />
             <Route render={() => <h2>404</h2>} />
           </Switch>
         </div>

@@ -11,7 +11,7 @@ const errHandler = err => {
 
 export default {
   service: service,
-  
+
   getCountries() {
     return service
       .get('/countries')
@@ -19,20 +19,58 @@ export default {
       .catch(errHandler);
   },
 
-  postCountries(data) {
+  postUserInvite(data) {
     return service
-      .post('/countries', data)
+      .post('/userinvite', data)
       .then(res => res.data)
       .catch(errHandler);
   },
-  
+
+  getUserInvites() {
+    return service
+      .get('/userinvite')
+      .then(res => res.data)
+      .catch(errHandler)
+  },
+
+  checkUserInvite(token) {
+    let path = '/userinvite/' + token.token
+    return service
+    .get(path)
+    .then(res => res.data)
+    .catch(errHandler)
+  },
+
+  getVeranstaltung() {
+    return service
+      .get('/veranstaltung')
+      .then(res => res.data)
+      .catch(errHandler);
+  },
+
+  getVeranstaltungById(Id) {
+    let path = '/veranstaltung/' + Id.Id
+    console.log(path);
+    return service
+    .get(path)
+    .then(res => res.data)
+    .catch(errHandler)
+  },
+
+  postVeranstaltung(data) {
+    return service
+      .post('/veranstaltung', data)
+      .then(res => res.data)
+      .catch(errHandler);
+  },
+
   getSecret() {
     return service
       .get('/secret')
       .then(res => res.data)
       .catch(errHandler);
   },
-  
+
   signup(userInfo) {
     return service
       .post('/signup', userInfo)
@@ -88,4 +126,21 @@ export default {
       .then(res => res.data)
       .catch(errHandler);
   },
+
+  /* Helper functions */
+  getFormattedDate(date, type='date') {
+    let fDate = new Date(Date.parse(date));
+    let output;
+    switch(type) {
+      case 'date':
+        output = fDate.toLocaleDateString();
+        break;
+      case 'time':
+      default:
+        output = fDate.toLocaleTimeString();
+        break;
+    }
+    return output;
+  }
+
 };

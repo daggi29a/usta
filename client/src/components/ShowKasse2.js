@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 // import { Route, Switch, NavLink, Link } from 'react-router-dom';
 // import api from '../api';
 // import './Sample.css';
+import { Button } from 'reactstrap';
 
 class ShowKasse extends Component {
 
@@ -38,26 +39,35 @@ class ShowKasse extends Component {
  }
  showRowKasse() {
    let row = [];
-   console.log(this.props.state);
    for (let j = 0; j < this.props.state.kasseAnzahl; j++ ) {
      row.push(
          <tr key={"kasseRow" + (j + 1) }>
            <th scope="row">{this.props.state.zeitenKasse[j]}</th>
-           {this.showColKasse2()}
+           {this.showColKasse2(j)}
          </tr>
      )
    }
-   return row;
+
+  return row;
  }
- showColKasse2() {
+
+ handleClick(i, j, e) {
+    let numberInArray = i + (j * this.props.state.leuteProKasse);
+    this.props.updateStates(numberInArray)
+  }
+
+ showColKasse2(j) {
    let col = [];
    for (let i = 0; i < this.props.state.leuteProKasse; i++ ) {
      col.push(
-       <td key={"colKasse" + (i + 1)}></td>
+       <td key={"colKasse" + (i + 1)}>{this.props.state.kasseRow[i + (j * this.props.state.leuteProKasse)]}<Button color="secondary" size="sm" onClick={(e) => this.handleClick(i, j, e)}>eintragen</Button>{' '}</td>
      )
    }
-     return col;
+   return col;
+
  }
+
+
   render() {
     return (
       <div>

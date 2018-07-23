@@ -13,7 +13,7 @@ class Login extends Component {
   handleInputChange(stateFieldName, event) {
     let newState = {}
     newState[stateFieldName] = event.target.value
-  
+
     this.setState(newState)
   }
 
@@ -29,7 +29,7 @@ class Login extends Component {
       })
   }
 
-  render() {   
+  render() {
     return (
       <div className="Login">
         <h2>Login</h2>

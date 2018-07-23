@@ -1,4 +1,10 @@
 .veranstaltungForm {
-padding-right: 20px; 
-border-right: 1px solid #ccc;
+  padding-right: 20px;
+  border-right: 1px solid #ccc;
+}
+
+.schichtplan {
+  background-color: white;
+  color: black;
+  padding: 20px;
 }

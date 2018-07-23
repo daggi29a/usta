@@ -18,12 +18,15 @@ const parser = multer({ storage });
 
 
 // Route to get all users
-router.get('/', (req, res, next) => {
+router.get('/api/users', (req, res, next) => {
   User.find()
     .then(users => {
       res.json(users)
     })
 });
+
+
+
 
 // Route to add a picture on one user with Cloudinary
 // To perform the request throw Postman, you need

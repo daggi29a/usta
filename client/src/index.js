@@ -1,10 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import './index.css';
 import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
-import 'bootstrap/dist/css/bootstrap.min.css';
+
+import WebFont from 'webfontloader';
+
+import './styles/css/custom.css';
+import './index.css';
+
+
+WebFont.load({
+  google: {
+    families: ['Open Sans', 'sans-serif']
+  }
+});
 
 ReactDOM.render((
   <BrowserRouter>

@@ -1,14 +1,25 @@
 import React, { Component } from 'react';
 import api from '../api';
+import { Container, Row, Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+
 
 class AddUser extends Component {
   constructor(props) {
     super(props)
     this.state = {
       email: "",
-      laden: "",
-      randomString: this.randomString(),
+      token: this.randomString(),
+      invites: []
     }
+  }
+
+  componentDidMount() {
+    api.getUserInvites()
+    .then(res => {
+      this.setState({
+        res
+      })
+    })
   }
 
   handleInputChange(stateFieldName, event) {
@@ -22,13 +33,24 @@ class AddUser extends Component {
     e.preventDefault()
     let data = {
       email: this.state.email,
-      laden: this.state.laden,
-      randomString: this.state.randomString
+      token: this.state.token
     }
-    api.signup(data)
+    api.postUserInvite(data)
       .then(result => {
-        console.log('SUCCESS!')
-        this.props.history.push("/adminstuff") // Redirect to the login page
+        console.log('SUCCESS!', result)
+        this.setState({
+          email: "",
+          token: this.randomString(),
+          message: `Email zu '${this.state.email}' gesendet`,
+          invites: [...this.state.invites, result.invite]
+          // delete example : invites: this.state.invites.filter(invite => invite._id != result.invite._id),
+
+        })
+        setTimeout(() => {
+          this.setState({
+            message: null
+          })
+        }, 2000)
       })
       .catch(err => {
         console.log('ERROR')
@@ -48,27 +70,37 @@ randomString() {
   render() {
 
     return (
+      <Container>
+        <Row>
+          <Col xs={6}>
       <div className="AddUser">
-        <h2>User hinzufügen</h2>
-        <form>
-          Email: <input type="text" value={this.state.email} onChange={(e) => {this.handleInputChange("email", e)}} /> <br/>
-          Laden:  <br/>
-          <div onChange={(e) => {this.handleInputChange("laden", e)}}>
-            <input type="radio" name="laden" value="cat"/>Cat<br/>
-            <input type="radio" name="laden" value="sau"/>Sauschdall<br/>
-            <input type="radio" name="laden" value="sc"/>Studentencafe<br/>
-            <input type="radio" name="laden" value="usta"/>UstA e.V.<br/>
-          </div>
+      <h4>User hinzufügen</h4>
+      <Form>
+        <FormGroup>
+          <Label for="email">Email:</Label>
+          <Input type="email" name="email" id="email" value={this.state.email} onChange={(e) => {this.handleInputChange("email", e)}} required/>
           <br/>
-          <hr/>
-          <h2>Neuer User</h2><br/>
-          Email: {this.state.email} <br/>
-          Laden: {this.state.laden}<br/>
-          Random: {this.state.randomString}<br/>
-          <br/>
-          <button onClick={(e) => this.handleClick(e)}>User hinzufügen</button>
-        </form>
+          <Button onClick={(e) => this.handleClick(e)}>User hinzufügen</Button>
+          </FormGroup>
+        </Form>
+        <hr/>
+        <h4>Neuer User</h4><br/>
+        Email: {this.state.email} <br/>
+        Random: {this.state.token}<br/>
+        <br/>
       </div>
+      </Col>
+      <Col xs={6}>
+        <h4>User invites</h4>
+        {this.state.invites.map((invite, i) => {
+          return (
+            <div className="invite" key={i}>{invite.email}</div>)})}
+        <hr />
+        <h4>User Liste</h4>
+        <div>test</div>
+      </Col>
+      </Row>
+      </Container>
     );
   }
 }

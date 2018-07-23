@@ -8,10 +8,21 @@ const config = require('../configs/index');
 
 router.post('/signup', (req, res, next) => {
   // extract the info we need from the body of the request
-  const { email, name, password } = req.body;
+  const {
+    email,
+    password,
+    firstname,
+    lastname,
+    laden,
+    tel
+  } = req.body;
+
   const user = new User({
     email,
-    name
+    firstname,
+    lastname,
+    laden,
+    tel
   });
 
   User.register(user, password, err => {
@@ -53,7 +64,7 @@ router.post('/login', (req, res, next) => {
         const token = jwt.encode(payload, config.jwtSecret);
         res.json({
           token,
-          name: user.name,
+          name: user.username,
         });
       }
     });

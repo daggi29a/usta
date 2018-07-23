@@ -5,24 +5,25 @@ import React, { Component } from 'react';
 // import { Route, Switch, NavLink, Link } from 'react-router-dom';
 // import api from '../api';
 // import './Sample.css';
+import { Button } from 'reactstrap';
 
 class ShowStuff extends Component {
 
   showVmensch() {
     if (this.props.state.vmensch === true)
-     return <div>V-Mensch:</div>
+     return <div>V-Mensch: <Button color="secondary" size="sm">eintragen</Button>{' '}</div>
   }
   showCatering() {
     if (this.props.state.catering === true)
-     return <div>Catering:</div>
+     return <div>Catering: <Button color="secondary" size="sm">eintragen</Button>{' '}</div>
   }
   showAufbau() {
     if (this.props.state.aufbau === true)
-     return <div>Aufbau:</div>
+     return <div>Aufbau: <Button color="secondary" size="sm">eintragen</Button>{' '}</div>
   }
   showSonstiges() {
     if (this.props.state.sonstiges === true)
-     return <div>{this.props.state.sonstigesName}</div>
+     return <div>{this.props.state.sonstigesName} <Button color="secondary" size="sm">eintragen</Button>{' '}</div>
   }
   render() {
     return (

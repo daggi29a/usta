@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom'
 import {
   Collapse,
   Navbar,
@@ -11,7 +12,8 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem } from 'reactstrap';
-  import './Navbar.css';
+import "./Navbar.css";
+
 
 
 export default class Example extends React.Component {
@@ -31,36 +33,35 @@ export default class Example extends React.Component {
   render() {
     return (
       <div>
-        <Navbar color="light" light expand="md">
-          <NavbarBrand href="/">UstA e.V.</NavbarBrand>
+        <Navbar color="primary" dark expand="md">
+          <NavbarBrand tag={Link} to="/">UstA e.V.</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="mr-auto" navbar>
               <NavItem>
-                <NavLink href="/veranstaltung/">Veranstaltungen</NavLink>
+                <NavLink tag={Link} to="/veranstaltung/liste">Veranstaltungen</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/neues">Neues</NavLink>
+                <NavLink tag={Link} to="/neues">Neues</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/dateien">Dateien</NavLink>
+                <NavLink tag={Link} to="/dateien">Dateien</NavLink>
               </NavItem>
               </Nav>
               <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink href="/adminstuff">Admin</NavLink>
+                <NavLink tag={Link} to="/adminstuff">Admin</NavLink>
               </NavItem>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
-                  Mr. User
-                </DropdownToggle>
-                <DropdownMenu right>
-                  <DropdownItem>
-                    <NavLink className="dropItem" href="/profil">Profil</NavLink>
+                  </DropdownToggle>
+                <DropdownMenu className="lala" right>
+                  <DropdownItem >
+                    <NavLink className="dropItem" tag={Link} to="/profil" className="lala">Profil</NavLink>
                   </DropdownItem>
                   <DropdownItem divider />
-                  <DropdownItem>
-                    <NavLink href="/logout">Logout</NavLink>
+                  <DropdownItem className="lala">
+                    <NavLink tag={Link} to="/logout" className="lala">Logout</NavLink>
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
