@@ -1,8 +1,114 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Open Sans", sans-serif;
+    color: #333;
+    background-color: #222 !important;
+}
+
 .tabelle {
-  width: 66%;
+    width: 66%;
 }
 
 .mittig {
-  width: 95%;
-  margin: auto;
+    width: 95%;
+    margin: auto;
+}
+
+.landing-container {
+    height: 100vh;
+    margin-top: -56px;
+    padding-top: 56px;
+    box-sizing: border-box;
+    background: url("../images/background.jpg") no-repeat center;
+    background-size: cover;
+}
+
+.content-card {
+    background: #eee;
+    padding: 20px;
+    border-radius: 10px;
+    &.alpha {
+        background: rgba(238, 238, 238, 0.8);
+    }
+    &.centered {
+        text-align: center;
+    }
+    a {
+        color: #6b5b95;
+    }
+}
+
+.landing-container {
+    .content-card {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 400px;
+        margin-top: -70px;
+        margin-left: -200px;
+    }
+}
+
+.container {
+    background-color: #eee;
+    margin-top: 20px;
+    padding: 20px 0;
+    h4 {
+        text-transform: uppercase;
+        font-size: 1.3em;
+    }
+}
+
+.dropdown-menu {
+    button a {
+        color: #333 !important;
+    }
+}
+
+.align-right {
+    float: right;
+}
+
+.zeiten-group {
+    display: block;
+    padding: 5px 5px 5px 40px;
+    width: 100%;
+    label {
+        margin-right: 15px;
+        display: block;
+        font-size: 0.9em;
+    }
+    input {
+    }
+    &:nth-child(odd) {
+        background-color: #ddd;
+    }
+    &:nth-child(even) {
+        background-color: #fff;
+    }
+}
+
+.VeranstaltungListe {
+    ul {
+        list-style: square;
+    }
+    li {
+        padding-bottom: 15px;
+        a {
+            font-size: 1.2em;
+            text-transform: uppercase;
+        }
+        div.info {
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+    }
+}
+.VeranstaltungDetail {
+    i.fas {
+        color: red;
+        cursor: pointer;
+        margin-left: 5px;
+    }
 }
